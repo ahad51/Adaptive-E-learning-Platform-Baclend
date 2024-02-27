@@ -63,7 +63,9 @@ const sendResetPasswordEmail = async (email, resetToken) => {
       text: `To reset your password, click on the following link: ${resetUrl}`,
     };
 
-    await sgMail.send(msg);
+    const response = await sgMail.send(msg);
+    console.log("SendGrid response:", response);
+
     return resetToken;
   } catch (error) {
     console.error("Error sending reset password email:", error.message);
