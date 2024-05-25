@@ -51,26 +51,24 @@ const sendOTP = async (email, otp) => {
 };
 
 const sendResetPasswordEmail = async (email, resetToken) => {
-  try {
-    if (!email) {
-      throw new Error("Email is required");
-    }
-    const resetUrl = `http://your-reset-password-url/${resetToken}`;
-    const msg = {
-      to: email,
-      from: "taha.rasheed@zweidevs.com",
-      subject: "Reset Your Password",
-      text: `To reset your password, click on the following link: ${resetUrl}`,
-    };
+	try {
+		if (!email) {
+			throw new Error('Email is required');
+		}
+		const resetUrl = `http://your-reset-password-url/${resetToken}`;
+		const msg = {
+			to: email,
+			from: 'taha.rasheed@zweidevs.com',
+			subject: 'Reset Your Password(Adapt Learn)',
+			text: `To reset your password, click on the following link: ${resetUrl}`,
+		};
 
-    const response = await sgMail.send(msg);
-    console.log("SendGrid response:", response);
-
-    return resetToken;
-  } catch (error) {
-    console.error("Error sending reset password email:", error.message);
-    throw error;
-  }
+		await sgMail.send(msg);
+		return resetToken;
+	} catch (error) {
+		console.error('Error sending reset password email:', error.message);
+		throw error;
+	}
 };
 
 const userID = async (req, res, next) => {
@@ -116,7 +114,6 @@ module.exports = {
   generateOTP,
   sendOTP,
   generateResetToken,
-  sendResetPasswordEmail,
   generateResetToken,
   sendResetPasswordEmail,
 };

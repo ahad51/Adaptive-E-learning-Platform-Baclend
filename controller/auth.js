@@ -3,7 +3,6 @@ const bcrypt = require("bcrypt");
 const { SuccessResponse, ErrorResponse } = require("../utils/responsehelpers");
 const {
   generateToken,
-
     generateResetToken,
     sendResetPasswordEmail
 } = require("../utils/commonFunctions");
@@ -43,7 +42,7 @@ const signupUser = async (req, res) => {
     ErrorResponse(res, 400, String(error), "users", String(error), "/");
     console.error("Error creating user:", error.message);
   }
-};
+}; 
 
 const loginUser = async (req, res) => {
   try {
@@ -75,6 +74,7 @@ const loginUser = async (req, res) => {
     ErrorResponse(res, 400, String(error), "users", String(error), "/");
   }
 };
+
 const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
@@ -135,6 +135,7 @@ const resetPassword = async (req, res) => {
     ErrorResponse(res, 400, "Failed to reset password");
   }
 };
+
 
 
 module.exports = {
