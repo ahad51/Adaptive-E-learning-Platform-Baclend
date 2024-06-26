@@ -1,10 +1,15 @@
 require("dotenv").config();
 const express = require("express");
-const app = express();
+const cors = require("cors"); // Importing cors
 const mongoose = require("./config/mongo");
-const connection = mongoose.connection;
-const port = 3000;
 const api = require("./routes/index");
+
+const app = express();
+const connection = mongoose.connection;
+const port = 4000;
+
+app.use(cors());
+
 
 app.use(express.json());
 
@@ -13,5 +18,7 @@ connection.once("open", () => {
 });
 
 app.use("/api", api);
+
 app.get("", (req, res) => res.send("Server Running Successfully"));
-app.listen(port, () => console.log(`Server up and running ${port}`));
+
+app.listen(port, () => console.log(`Server up and running on port ${port}`));
